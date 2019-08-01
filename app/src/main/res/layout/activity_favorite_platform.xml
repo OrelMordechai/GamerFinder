@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".ui.login.FavoritePlatformActivity">
+
+
+    <!--High layer (Contain only logo and details text) -->
+    <ImageView
+        android:id="@+id/logo_favorite"
+        android:layout_width="150dp"
+        android:layout_height="90dp"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/img_logo"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/logo1" />
+    <TextView
+        android:id="@+id/tv_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:fontFamily="@font/fightingspirit"
+        android:scaleType="fitCenter"
+        android:text="@string/txt_favorite_platform"
+        android:textColor="#DBE2EF"
+        android:textSize="25sp"
+        android:layout_below="@id/logo_favorite"/>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/tv_details"
+        >
+
+        <ImageButton
+            android:id="@+id/ps4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/playstation4small"
+            android:background="@drawable/platform_select"/>
+
+        <ImageButton
+            android:id="@+id/xbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/xboxonewhite"
+            android:background="@drawable/platform_select"
+            />
+
+        <ImageButton
+            android:id="@+id/pc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/pcgamingsmall"
+            android:background="@drawable/platform_select"
+            />
+
+    </LinearLayout>
+
+    <!-- Next and Back Buttons -->
+    <RelativeLayout
+        android:id="@+id/rellay2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="24dp"
+        >
+
+        <Button
+            android:id="@+id/nextId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/btn_bg"
+            android:fontFamily="sans-serif"
+            android:text="@string/btn_next"
+            android:textAllCaps="true"
+            android:textColor="@color/cardview_light_background" />
+
+        <Button
+            android:id="@+id/backId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bg"
+            android:fontFamily="sans-serif"
+            android:text="@string/btn_back"
+            android:textAllCaps="true"
+            android:textColor="@color/cardview_light_background" />
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

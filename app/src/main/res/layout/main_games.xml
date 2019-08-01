@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    tools:context=".ui.login.FavoriteGamesActivity">
+
+    <RelativeLayout
+        android:id="@+id/boxUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBlue">
+        
+
+        <RelativeLayout
+            android:id="@+id/imgUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <!--Contain photo of user -->
+            <ImageView
+                android:id="@+id/imgView_photoUser"
+                android:layout_width="120dp"
+                android:layout_height="140dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/nophotouser" />
+        </RelativeLayout>
+
+        <!--for tap button-->
+        <Button
+            android:id="@+id/showpopup"
+            android:onClick="showPopup"
+            tools:ignore="OnClick"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="7dp"
+            android:layout_width="30dp"
+            android:layout_height="32dp"
+            android:background="@drawable/list"
+           />
+
+
+        <!--This for usernameText-->
+        <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_below="@+id/imgUser"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/fightingspirit"
+        android:scaleType="fitCenter"
+        android:text="Username"
+        android:textColor="#DBE2EF"
+        android:textSize="23sp"/>
+    </RelativeLayout>
+
+
+    <!--Game Button -->
+    <Button
+        android:id="@+id/game1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/boxUser"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/starwarsicon" />
+
+    <Button
+        android:id="@+id/game2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/sportfifaicon"
+        android:layout_below="@+id/boxUser"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="145dp"/>
+
+    <Button
+        android:id="@+id/game3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/boxUser"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="267dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="3dp"
+        android:background="@drawable/justcause2icon" />
+
+    <Button
+        android:id="@+id/game4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/game1"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/callofdutyicon" />
+
+    <Button
+        android:id="@+id/game5"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/assiasin"
+        android:layout_below="@+id/game2"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="145dp"/>
+
+    <Button
+        android:id="@+id/game6"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/game3"
+        android:layout_marginStart="270dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="3dp"
+        android:background="@drawable/needforspeedicon" />
+
+    <Button
+        android:id="@+id/game7"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/game4"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginVertical="35dp"
+        android:background="@drawable/carsicon" />
+
+    <Button
+        android:id="@+id/game8"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/dragonball"
+        android:layout_below="@+id/game5"
+        android:layout_marginTop="20dp"
+
+        android:layout_marginVertical="35dp"
+        android:layout_marginStart="145dp"/>
+
+    <Button
+        android:id="@+id/game9"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/game6"
+        android:layout_marginStart="270dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="3dp"
+
+        android:layout_marginVertical="35dp"
+        android:background="@drawable/mortalkombaticon" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/game7"
+        android:background="@color/colorBlue">
+
+        <!--Add friend button-->
+        <Button
+            android:id="@+id/addFriendId"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="45sp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/addfriendicon" />
+        <!--For Text friend-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/addFriendId"
+            android:layout_marginStart="47dp"
+            android:text="Friends"
+            android:textColor="@color/blackColor" />
+
+        <!--Home button-->
+        <Button
+            android:id="@+id/homeId"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="170dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/home" />
+        <!--For Text home-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/addFriendId"
+            android:layout_marginStart="176dp"
+            android:text="Home"
+            android:textColor="@color/blackColor" />
+        <!--Home button-->
+        <Button
+            android:id="@+id/searchId"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="300dp"
+            android:layout_marginTop="3dp"
+
+            android:background="@drawable/search" />
+        <!--For Text search-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/addFriendId"
+            android:layout_marginStart="302dp"
+            android:text="Search"
+            android:textColor="@color/blackColor" />
+    </RelativeLayout>
+
+</RelativeLayout>

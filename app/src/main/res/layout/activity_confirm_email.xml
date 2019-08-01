@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:background="@drawable/background"
+    tools:context=".ui.login.ConfirmEmailActivity">
+
+    <!--logo Image view -->
+    <ImageView
+        android:id="@+id/imgView_logo"
+        android:layout_width="220dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/img_logo"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/logo1" />
+    <!--Logo text view -->
+    <TextView
+        android:id="@+id/tv_gamer_finder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/fightingspirit"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:paddingBottom="20dp"
+        android:scaleType="fitCenter"
+        android:textAllCaps="true"
+        android:text="@string/GamerFinder"
+        android:textColor="#DBE2EF"
+        android:textSize="25sp"
+        android:layout_below="@id/imgView_logo"/>
+    <!-- /////////////////////// -->
+
+    <LinearLayout
+        android:id="@+id/linlay_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_gamer_finder"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:padding="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/iv_mail"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/mail"
+            android:padding="8dp"
+            android:tint="@color/colorAccent"
+            />
+
+        <EditText
+            android:id="@+id/et_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignBaseline="@+id/iv_mail"
+            android:background="@drawable/et_bg"
+            android:layout_toRightOf="@id/iv_mail"
+            android:hint="Email Address"
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
+
+
+    <!--Login Now Button -->
+    <Button
+        android:id="@+id/btn_Login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linlay_1"
+        android:text="@string/btn_send"
+        android:textAllCaps="false"
+        android:background="@drawable/btn_bg"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#DBE2EF"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"
+        android:textSize="13sp"
+        android:onClick="btn_send"/>
+
+</RelativeLayout>
