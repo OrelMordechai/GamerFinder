@@ -13,8 +13,7 @@ import android.widget.TextView;
 import com.orelandshadi.gamerfinder.R;
 import com.orelandshadi.gamerfinder.models.SessionData;
 import com.orelandshadi.gamerfinder.models.UserData;
-import com.orelandshadi.gamerfinder.ui.game.MainGamesActivity;
-import com.orelandshadi.gamerfinder.ui.login.FavoritePlatformActivity;
+import com.orelandshadi.gamerfinder.ui.userprofile.MainGamesActivity;
 import com.orelandshadi.gamerfinder.ui.login.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {

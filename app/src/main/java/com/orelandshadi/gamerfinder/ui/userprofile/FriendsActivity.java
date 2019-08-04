@@ -1,15 +1,15 @@
-package com.orelandshadi.gamerfinder.ui.game;
+package com.orelandshadi.gamerfinder.ui.userprofile;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.orelandshadi.gamerfinder.R;
 
-public class HomeActivity extends AppCompatActivity {
+public class FriendsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_friends);
     }
 }

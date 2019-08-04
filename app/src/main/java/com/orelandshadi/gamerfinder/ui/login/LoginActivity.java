@@ -1,37 +1,22 @@
 package com.orelandshadi.gamerfinder.ui.login;
 
-
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Patterns;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.orelandshadi.gamerfinder.models.PasswordDialog;
+import com.orelandshadi.gamerfinder.utils.StringUtils;
 import com.orelandshadi.gamerfinder.R;
-import com.orelandshadi.gamerfinder.ui.game.MainGamesActivity;
-
-import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
 
     private Button loginButton;
-
-
-    private static final Pattern PASSWORD_PATTERN =
-            Pattern.compile("^" +
-                    //"(?=.*[0-9])" +         //at least 1 digit
-                    //"(?=.*[a-z])" +         //at least 1 lower case letter
-                    //"(?=.*[A-Z])" +         //at least 1 upper case letter
-                    "(?=.*[a-zA-Z])" +      //any letter
-                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
-                    "(?=\\S+$)" +           //no white spaces
-                    ".{4,}" +               //at least 4 characters
-                    "$");
-
     private TextInputLayout mTextInputLayoutEmail;
     private TextInputLayout mTextInputLayoutPassword;
 
@@ -46,45 +31,54 @@ public class LoginActivity extends AppCompatActivity {
         mTextInputLayoutEmail = findViewById(R.id.text_input_email);
         mTextInputLayoutPassword = findViewById(R.id.text_input_password);
 
+        findViewById(R.id.iv_lock).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog();
+                Log.d("icon_pass", "icon_Password clicked");
+            }
 
-
+            private void openDialog() {
+                PasswordDialog exampleDialog = new PasswordDialog();
+                exampleDialog.show(getSupportFragmentManager(), "pass dialog");
+            }
+        });
     }
 
-
     private boolean validateEmail() {
+        boolean isValid = false;
         String emailInput = mTextInputLayoutEmail.getEditText().getText().toString().trim();
 
         if (emailInput.isEmpty()) {
-            Toast.makeText(this, "Please enter email",Toast.LENGTH_SHORT).show();
-            return false;
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
-            Toast.makeText(this, "Please enter a valid email address",Toast.LENGTH_SHORT).show();
-            return false;
+            mTextInputLayoutEmail.setError("Field can't be empty");
+        } else if (!StringUtils.isValidEmail(emailInput)) {
+            mTextInputLayoutEmail.setError("Please enter a valid email address");
         } else {
-            // Adding this to see how we login in main Game!
-            loginButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(getApplicationContext(), MainGamesActivity.class));
-                }
-            });
-            return true;
+            mTextInputLayoutEmail.setError(null);
+            isValid = true;
         }
+        return isValid;
     }
 
-
     private boolean validatePassword() {
+        boolean isValid = false;
         String passwordInput = mTextInputLayoutPassword.getEditText().getText().toString().trim();
 
+//        Log.d("@@@@@@@ isValidPassword", passwordInput);
+
         if (passwordInput.isEmpty()) {
-            Toast.makeText(this, "Please enter password",Toast.LENGTH_SHORT).show();
-            return false;
-        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            Toast.makeText(this, "Please enter a valid password",Toast.LENGTH_SHORT).show();
-            return false;
+            mTextInputLayoutPassword.setError("Field can't be empty");
+        } else if (!StringUtils.isValidPassword(passwordInput)) {
+            mTextInputLayoutPassword.setError("Password too weak, Click on the lock icon to get information");
+        } else if (passwordInput.length() < 6) {
+            mTextInputLayoutPassword.setError("Must contain at least 6 charters");
+        } else if (passwordInput.length() > 16) {
+            mTextInputLayoutPassword.setError("Must contain less than 16 charters");
         } else {
-            return true;
+            mTextInputLayoutPassword.setError(null);
+            isValid = true;
         }
+        return isValid;
     }
 
     public void confirmInput(View v) {
@@ -92,18 +86,21 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        //////// SHOULD BE DELETED
         String input = "Email: " + mTextInputLayoutEmail.getEditText().getText().toString();
         input += "\n";
         input += "Password: " + mTextInputLayoutPassword.getEditText().getText().toString();
 
         Toast.makeText(this, input, Toast.LENGTH_SHORT).show();
+        //////// SHOULD BE DELETED ^
+
     }
 
-    public void signUpButton(View v){
-        startActivity(new Intent(getApplicationContext(),SignUpActivity.class));
+    public void signUpButton(View v) {
+        startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
     }
 
-    public void forgotPasswordButton(View v){
+    public void forgotPasswordButton(View v) {
         startActivity(new Intent(getApplicationContext(), ConfirmEmailActivity.class));
     }
 

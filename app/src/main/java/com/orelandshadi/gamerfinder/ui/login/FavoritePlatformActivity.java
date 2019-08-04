@@ -45,7 +45,7 @@ public class FavoritePlatformActivity extends AppCompatActivity {
                 xbox.setSelected(!xbox.isSelected());
                 if(xbox.isSelected()) {
                     mDevices.add(UserData.UserDevice.Xbox);
-                    Toast.makeText(FavoritePlatformActivity.this,"You select Xbox One",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(FavoritePlatformActivity.this,"You select Xbox One",Toast.LENGTH_SHORT).show();
                 } else {
                     mDevices.remove(UserData.UserDevice.Xbox);
                 }
@@ -59,7 +59,7 @@ public class FavoritePlatformActivity extends AppCompatActivity {
                 ps4.setSelected(!ps4.isSelected());
                 if(ps4.isSelected()) {
                     mDevices.add(UserData.UserDevice.PS4);
-                    Toast.makeText(FavoritePlatformActivity.this,"You select PS4",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(FavoritePlatformActivity.this,"You select PS4",Toast.LENGTH_SHORT).show();
                 } else {
                     mDevices.remove(UserData.UserDevice.PS4);
                 }
@@ -72,7 +72,7 @@ public class FavoritePlatformActivity extends AppCompatActivity {
                 pc.setSelected(!pc.isSelected());
                 if(pc.isSelected()) {
                     mDevices.add(UserData.UserDevice.PC);
-                    Toast.makeText(FavoritePlatformActivity.this,"You select PC",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(FavoritePlatformActivity.this,"You select PC",Toast.LENGTH_SHORT).show();
                 } else {
                     mDevices.remove(UserData.UserDevice.PC);
                 }

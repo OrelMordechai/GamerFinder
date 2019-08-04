@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background"
     android:orientation="vertical"
-    android:padding="30dp"
+    android:padding="25dp"
     tools:context=".ui.login.SignUpActivity">
 
     <!--logo Image view -->
@@ -57,9 +57,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_SignUp"
-        android:layout_marginTop="1dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="0dp"
         >
 
         <ImageView
@@ -80,7 +80,10 @@
             android:background="@drawable/et_bg"
             android:layout_toRightOf="@id/iv_mail"
             android:hint="Email Address"
+            android:inputType="textEmailAddress"
+            android:paddingTop="3dp"
             android:paddingLeft="20dp"
+            android:paddingRight="6dp"
             android:textSize="15sp"
             />
     </LinearLayout>
@@ -91,9 +94,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/Linlay_01"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="0dp"
         >
 
         <ImageView
@@ -113,8 +116,13 @@
             android:layout_alignBaseline="@+id/iv_lock"
             android:background="@drawable/et_bg"
             android:layout_toRightOf="@id/iv_lock"
+            android:gravity="left"
             android:hint="Password"
+            android:inputType="textPassword"
+            android:paddingTop="10dp"
             android:paddingLeft="20dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="6dp"
             android:textSize="15sp"
             />
     </LinearLayout>
@@ -124,9 +132,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/Linlay_02"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="0dp"
         >
 
         <ImageView
@@ -145,9 +153,14 @@
             android:layout_alignBaseline="@+id/iv_lock"
             android:background="@drawable/et_bg"
             android:layout_toRightOf="@id/iv_lock"
-
-            android:hint="confirm Password"
+            android:ems="10"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:gravity="left"
+            android:paddingTop="10dp"
             android:paddingLeft="20dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="6dp"
             android:textSize="15sp"
             />
     </LinearLayout>
@@ -188,7 +201,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/txt_continue_with"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="5dp"
         android:gravity="center">
 
@@ -223,15 +235,16 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:background="@drawable/white_line" />
+
         <ImageButton
-            android:id="@+id/instegram_btn"
+            android:id="@+id/steam_btn"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:translationY="5dp"
-            android:background="@drawable/instegramicon"
-            android:contentDescription="btn_instegram" />
+            android:background="@drawable/iconfinder_steam_171938"
+            android:contentDescription="btn_steam"
+            android:translationY="5dp" />
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"

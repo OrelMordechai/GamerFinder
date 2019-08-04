@@ -59,103 +59,10 @@
     </RelativeLayout>
 
 
-    <!--Game Button -->
-    <Button
-        android:id="@+id/game1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_below="@+id/boxUser"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/starwarsicon" />
-
-    <Button
-        android:id="@+id/game2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/sportfifaicon"
-        android:layout_below="@+id/boxUser"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="145dp"/>
-
-    <Button
-        android:id="@+id/game3"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_below="@+id/boxUser"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="267dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="3dp"
-        android:background="@drawable/justcause2icon" />
-
-    <Button
-        android:id="@+id/game4"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_below="@+id/game1"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/callofdutyicon" />
-
-    <Button
-        android:id="@+id/game5"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/assiasin"
-        android:layout_below="@+id/game2"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="145dp"/>
-
-    <Button
-        android:id="@+id/game6"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_below="@+id/game3"
-        android:layout_marginStart="270dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="3dp"
-        android:background="@drawable/needforspeedicon" />
-
-    <Button
-        android:id="@+id/game7"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_below="@+id/game4"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginVertical="35dp"
-        android:background="@drawable/carsicon" />
-
-    <Button
-        android:id="@+id/game8"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/dragonball"
-        android:layout_below="@+id/game5"
-        android:layout_marginTop="20dp"
-
-        android:layout_marginVertical="35dp"
-        android:layout_marginStart="145dp"/>
-
-    <Button
-        android:id="@+id/game9"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_below="@+id/game6"
-        android:layout_marginStart="270dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="3dp"
-
-        android:layout_marginVertical="35dp"
-        android:background="@drawable/mortalkombaticon" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/game7"
         android:background="@color/colorBlue">
 
         <!--Add friend button-->

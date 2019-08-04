@@ -1,20 +1,21 @@
 package com.orelandshadi.gamerfinder.utils;
 
-import java.util.regex.Matcher;
+import android.util.Patterns;
+
 import java.util.regex.Pattern;
 
 public class StringUtils {
 
-    public static Boolean isValidEmail(String email){
-        // The Validation for Email
-        String validemail = "[a-zA-Z0-9\\+\\.\\_\\@\\+]{1,256}"+
-                "\\@"+
-                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}"+
-                "("+
-                "\\."+
-                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}"+
-                ")+";
-        Matcher matcher = Pattern.compile(validemail).matcher(email);
-        return matcher.matches();
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{0,}$");
+
+    public static Boolean isValidEmail(String email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
+
+    public static Boolean isValidPassword(String passwordInput) {
+        return PASSWORD_PATTERN.matcher(passwordInput).matches();
+    }
+
 }
+
