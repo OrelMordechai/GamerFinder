@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -22,10 +23,9 @@ import java.util.List;
 
 public class FavoriteGamesActivity extends AppCompatActivity {
 
-    public ArrayList<UserData.FavoriteGame> mFavoriteGames = new ArrayList<>();
-
     private Button doneButton;
     private Button backButton;
+    private ArrayList<Game> mFavoriteGame = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,18 +33,15 @@ public class FavoriteGamesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_favorite_games);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        List<Game> mListOfGame = new ArrayList<>();
-        mListOfGame = getData();
+        List<Game> mListOfGame = getData();
 
-        RecyclerView myrv = (RecyclerView) findViewById(R.id.recyclerview_id);
-        RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(this, mListOfGame);
-        myrv.setLayoutManager(new GridLayoutManager(this, 3));
-        myrv.setAdapter(myAdapter);
-
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_id);
+        final RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(this, mListOfGame, mFavoriteGame);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        mRecyclerView.setAdapter(myAdapter);
 
         doneButton = (Button) findViewById(R.id.doneId);
         backButton = (Button) findViewById(R.id.backId);
-
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,18 +53,28 @@ public class FavoriteGamesActivity extends AppCompatActivity {
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mFavoriteGames.size() > 0) {
-                    SessionData.sharedInstance().getUserData().setDidUserCompleteRegistration(true);
-                    SessionData.sharedInstance().getUserData().setMfavoriteGame(mFavoriteGames);
-                    Intent intent = new Intent(FavoriteGamesActivity.this, MainGamesActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(FavoriteGamesActivity.this, "Please select your Favorite Games.", Toast.LENGTH_SHORT).show();
+
+                for (int i = 0; i < mFavoriteGame.size(); i++) {
+                    Log.d("index: " + i, mFavoriteGame.get(i).toString());
                 }
 
+                if (mFavoriteGame.size() > 0) {
+                    SessionData.sharedInstance().getUserData().setDidUserCompleteRegistration(true);
+                    SessionData.sharedInstance().getUserData().setMfavoriteGame(mFavoriteGame);
+                    Intent intent = new Intent(FavoriteGamesActivity.this, MainGamesActivity.class);
+                    startActivity(intent);
+
+                    /*
+                        @@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                        SEND LOGIN REQUEST TO THE SERVER
+                        @@@@@@@@@@@@            @@@@@@@@@
+                    */
+
+                } else {
+                    Toast.makeText(FavoriteGamesActivity.this, "Please at least one favorite Game.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
     }
 
     private List<Game> getData() {

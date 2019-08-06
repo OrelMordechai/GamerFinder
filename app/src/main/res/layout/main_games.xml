@@ -4,117 +4,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
+    android:background="@drawable/background"
     tools:context=".ui.login.FavoriteGamesActivity">
 
-    <RelativeLayout
-        android:id="@+id/boxUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorBlue">
-        
-
-        <RelativeLayout
-            android:id="@+id/imgUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true">
-
-            <!--Contain photo of user -->
-            <ImageView
-                android:id="@+id/imgView_photoUser"
-                android:layout_width="120dp"
-                android:layout_height="140dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/nophotouser" />
-        </RelativeLayout>
-
-        <!--for tap button-->
-        <Button
-            android:id="@+id/showpopup"
-            android:onClick="showPopup"
-            tools:ignore="OnClick"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="7dp"
-            android:layout_width="30dp"
-            android:layout_height="32dp"
-            android:background="@drawable/list"
-           />
-
-
-        <!--This for usernameText-->
-        <TextView
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:layout_below="@+id/imgUser"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/fightingspirit"
-        android:scaleType="fitCenter"
-        android:text="Username"
-        android:textColor="#DBE2EF"
-        android:textSize="23sp"/>
-    </RelativeLayout>
-
-
-
-    <RelativeLayout
+    <!--This is for drawer Fragments-->
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBlue">
+        android:fitsSystemWindows="true"
+        tools:openDrawer="start">
 
-        <!--Add friend button-->
-        <Button
-            android:id="@+id/addFriendId"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="45sp"
-            android:layout_marginTop="3dp"
-            android:background="@drawable/addfriendicon" />
-        <!--For Text friend-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/addFriendId"
-            android:layout_marginStart="47dp"
-            android:text="Friends"
-            android:textColor="@color/blackColor" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <!--Home button-->
-        <Button
-            android:id="@+id/homeId"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="170dp"
-            android:layout_marginTop="3dp"
-            android:background="@drawable/home" />
-        <!--For Text home-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/addFriendId"
-            android:layout_marginStart="176dp"
-            android:text="Home"
-            android:textColor="@color/blackColor" />
-        <!--Home button-->
-        <Button
-            android:id="@+id/searchId"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="300dp"
-            android:layout_marginTop="3dp"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#80000000"
+                android:elevation="4dp"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-            android:background="@drawable/search" />
-        <!--For Text search-->
-        <TextView
+            <FrameLayout
+                android:id="@+id/fragment_container_drawer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nav_view"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/addFriendId"
-            android:layout_marginStart="302dp"
-            android:text="Search"
-            android:textColor="@color/blackColor" />
-    </RelativeLayout>
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/nav_header"
+            app:menu="@menu/drawer_menu" />
+
+    </android.support.v4.widget.DrawerLayout>
+
+
+    <!--This for bottom Fragments-->
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_navigation" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorAccent"
+        app:itemIconTint="@color/colorPrimary"
+        app:menu="@menu/bottom_navigation"/>
 
 </RelativeLayout>

@@ -1,6 +1,8 @@
 package com.orelandshadi.gamerfinder.models;
 
 
+import com.orelandshadi.gamerfinder.R;
+
 import java.util.ArrayList;
 
 public class UserData {
@@ -13,10 +15,39 @@ public class UserData {
         Xbox, PS4, PC
     }
 
-    public enum FavoriteGame{
-        Fifa, Need4speed, Callofduty, Starwars, Mortalkombat, Dragonball, Justcause2, Assiasin, Cars
-
-        }
+//    public enum FavoriteGame{
+//        Apex_Legends("Apex Legends", R.drawable.apexlegends),
+//        Fortnite("Fortnite", R.drawable.fortnite),
+//        Call_Of_Duty_Black_ops_4("Call Of Duty Black ops 4", R.drawable.callofdutyblackops4),
+//        Rainbow_six_Siege("Rainbow six Siege", R.drawable.rainbowsixsiege),
+//        The_Division_2("The Division 2", R.drawable.thedivision2),
+//        Playerunknowns_Battlegrounds("Playerunknown's Battlegrounds", R.drawable.playerunknownbattlegrounds),
+//        Black_Desert_Online("Black Desert Online", R.drawable.blackdesertonline),
+//        League_of_Legends("League of Legends", R.drawable.leagueoflegends),
+//        World_of_Warcraft("World of Warcraft", R.drawable.warcraft),
+//        Destiny_2("Destiny 2", R.drawable.destiny2),
+//        Battlefield_V("Battlefield V", R.drawable.battlefieldv),
+//        Dota_2("Dota 2", R.drawable.dota2),
+//        Grand_Theft_Auto_V("Grand Theft Auto V", R.drawable.gtav),
+//        FIFA_19("FIFA 19", R.drawable.fifa19),
+//        Mortal_Kombat_11("Mortal Kombat 11", R.drawable.mk11);
+//
+//        private String Title;
+//        private int idImg;
+//
+//        FavoriteGame(String title, int idImg) {
+//            Title = title;
+//            this.idImg = idImg;
+//        }
+//
+//        public String getTitle() {
+//            return Title;
+//        }
+//
+//        public int getIdImg() {
+//            return idImg;
+//        }
+//    }
 
     private String mEmail;
     private String mPassword;
@@ -26,7 +57,7 @@ public class UserData {
     private String mCountry;
     private String mAbout;
     private ArrayList<UserDevice> mDevices;
-    private ArrayList<FavoriteGame> mfavoriteGame;
+    private ArrayList<Game> mfavoriteGame;
     private boolean didUserCompleteRegistration;
 
     public UserData() {
@@ -80,11 +111,11 @@ public class UserData {
         return mDevices;
     }
 
-    public  ArrayList<FavoriteGame> getMfavoriteGame() {
+    public  ArrayList<Game> getMfavoriteGame() {
         return mfavoriteGame;
     }
 
-    public void setMfavoriteGame( ArrayList<FavoriteGame> gameFav) {
+    public void setMfavoriteGame( ArrayList<Game> gameFav) {
         mfavoriteGame = gameFav;
     }
 

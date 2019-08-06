@@ -6,6 +6,7 @@ public class Game {
 
     private String Title;
     private int Thumbnail ;
+    private boolean isSelected =false;
 
     public Game() {
     }
@@ -30,4 +31,21 @@ public class Game {
     public void setThumbnail(int thumbnail) {
         Thumbnail = thumbnail;
     }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "Title='" + Title + '\'' +
+                ", Thumbnail=" + Thumbnail +
+                '}';
+    }
 }
+

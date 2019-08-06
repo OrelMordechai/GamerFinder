@@ -1,6 +1,7 @@
 package com.orelandshadi.gamerfinder.models;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.orelandshadi.gamerfinder.R;
+import com.orelandshadi.gamerfinder.ui.login.FavoriteGamesActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,19 +24,20 @@ import java.util.List;
  *  getItemCount: which Returns the length of the RecyclerView.
  *  onAttachedToRecyclerView: which attaches the adapter to the RecyclerView.
  *
-*/
+ */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
-    private Context mContext ;
+    private Context mContext;
     //The Data class is a custom java class that acts as a structure for holding the information for every item of the RecyclerView.
     private List<Game> mListOfGame;
-    public ArrayList<UserData.FavoriteGame> mFavoriteGames = new ArrayList<>();
+    private ArrayList<Game> mFavoriteGames;
 
 
     // Constructor
-    public RecyclerViewAdapter(Context mContext, List<Game> mListOfGame) {
+    public RecyclerViewAdapter(Context mContext, List<Game> mListOfGame, ArrayList<Game> mFavoriteGame) {
         this.mContext = mContext;
         this.mListOfGame = mListOfGame;
+        this.mFavoriteGames = mFavoriteGame;
     }
 
     //is a java class that stores the reference to the card layout views that have to be dynamically
@@ -43,33 +46,39 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view ;
         LayoutInflater mInflater = LayoutInflater.from(mContext);
-        view = mInflater.inflate(R.layout.cardview_item_game,parent,false);
+        View view = mInflater.inflate(R.layout.cardview_item_game, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final MyViewHolder viewHolder, final int position) {
 
         viewHolder.tv_game_title.setText(mListOfGame.get(position).getTitle());
         viewHolder.img_game_thumbnail.setImageResource(mListOfGame.get(position).getThumbnail());
+
+        final int currentPosition = position;
+        final Game infoGame = mListOfGame.get(position);
+
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext,"Click",Toast.LENGTH_SHORT).show();
-
-//                Intent intent = new Intent(mContext,FavoriteGamesActivity.class);
-//
-//                // passing data to the favorite game activity
-//                intent.putExtra("Title",mListOfGame.get(position).getTitle());
-//                intent.putExtra("Thumbnail",mListOfGame.get(position).getThumbnail());
-//                // start the activity
-//                mContext.startActivity(intent);
-
-
+                String temp = mListOfGame.get(position).getTitle();
+                infoGame.setSelected(!infoGame.isSelected());
+                if(infoGame.isSelected()) {
+                    viewHolder.cardView.setBackgroundColor(Color.parseColor("#039be5"));
+                    viewHolder.tv_game_title.setTextColor(Color.parseColor("#ffffff"));
+                    mFavoriteGames.add(infoGame);
+                    //Toast.makeText(mContext,"You select " + mListOfGame.get(position).getTitle(),Toast.LENGTH_SHORT).show();
+                } else {
+                    viewHolder.cardView.setBackgroundColor(Color.parseColor("#ffffff"));
+                    viewHolder.tv_game_title.setTextColor(Color.parseColor("#000000"));
+                    mFavoriteGames.remove(infoGame);
+                    //Toast.makeText(mContext,"unselect "+ mListOfGame.get(position).getTitle(),Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
     }
 
     @Override
@@ -81,35 +90,35 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         TextView tv_game_title;
         ImageView img_game_thumbnail;
-        CardView cardView ;
+        CardView cardView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            tv_game_title = (TextView) itemView.findViewById(R.id.game_title_id) ;
+            tv_game_title = (TextView) itemView.findViewById(R.id.game_title_id);
             img_game_thumbnail = (ImageView) itemView.findViewById(R.id.game_img_id);
             cardView = (CardView) itemView.findViewById(R.id.cardview_id);
 
         }
     }
 
-    private List<Game> getData()
-    {
+
+    private List<Game> getData() {
         List<Game> mListOfGame = new ArrayList<>();
-        mListOfGame.add(new Game("Apex Legends",R.drawable.apexlegends));
-        mListOfGame.add(new Game("Fortnite",R.drawable.fortnite));
-        mListOfGame.add(new Game("Call Of Duty Black ops 4",R.drawable.callofdutyblackops4));
-        mListOfGame.add(new Game("Rainbow six Siege",R.drawable.rainbowsixsiege));
-        mListOfGame.add(new Game("The Division 2",R.drawable.thedivision2));
-        mListOfGame.add(new Game("Playerunknown's Battlegrounds",R.drawable.playerunknownbattlegrounds));
-        mListOfGame.add(new Game("Black Desert Online",R.drawable.blackdesertonline));
-        mListOfGame.add(new Game("League of Legends",R.drawable.leagueoflegends));
-        mListOfGame.add(new Game("World of Warcraft",R.drawable.warcraft));
-        mListOfGame.add(new Game("Destiny 2",R.drawable.destiny2));
-        mListOfGame.add(new Game("Battlefield V",R.drawable.battlefieldv));
-        mListOfGame.add(new Game("Dota 2",R.drawable.dota2));
-        mListOfGame.add(new Game("Grand Theft Auto V",R.drawable.gtav));
-        mListOfGame.add(new Game("FIFA 19",R.drawable.fifa19));
-        mListOfGame.add(new Game("Mortal Kombat 11",R.drawable.mk11));
+        mListOfGame.add(new Game("Apex Legends", R.drawable.apexlegends));
+        mListOfGame.add(new Game("Fortnite", R.drawable.fortnite));
+        mListOfGame.add(new Game("Call Of Duty Black ops 4", R.drawable.callofdutyblackops4));
+        mListOfGame.add(new Game("Rainbow six Siege", R.drawable.rainbowsixsiege));
+        mListOfGame.add(new Game("The Division 2", R.drawable.thedivision2));
+        mListOfGame.add(new Game("Playerunknown's Battlegrounds", R.drawable.playerunknownbattlegrounds));
+        mListOfGame.add(new Game("Black Desert Online", R.drawable.blackdesertonline));
+        mListOfGame.add(new Game("League of Legends", R.drawable.leagueoflegends));
+        mListOfGame.add(new Game("World of Warcraft", R.drawable.warcraft));
+        mListOfGame.add(new Game("Destiny 2", R.drawable.destiny2));
+        mListOfGame.add(new Game("Battlefield V", R.drawable.battlefieldv));
+        mListOfGame.add(new Game("Dota 2", R.drawable.dota2));
+        mListOfGame.add(new Game("Grand Theft Auto V", R.drawable.gtav));
+        mListOfGame.add(new Game("FIFA 19", R.drawable.fifa19));
+        mListOfGame.add(new Game("Mortal Kombat 11", R.drawable.mk11));
 
         return mListOfGame;
     }

@@ -115,11 +115,15 @@ public class DetailsActivity extends AppCompatActivity implements Validator.Vali
         if (ageEditText.getText().toString() != null || !ageEditText.getText().toString().isEmpty()) {
             try {
                 Integer age = Integer.parseInt(ageEditText.getText().toString());
-                if (age < 8 && age > 120) {
+                if (age < 8) {
                     status = false;
+                    ageEditText.setError("Please enter an age above 8");
+                } else if (age > 120) {
+                    status = false;
+                    ageEditText.setError("Please enter an age below 120");
                 }
             } catch (Exception ex) {
-                Toast.makeText(getApplicationContext(), "Please enter valid age", Toast.LENGTH_LONG).show();
+                ageEditText.setError("Please enter valid age between 8-120");
             }
         } else {
             status = false;
@@ -129,7 +133,6 @@ public class DetailsActivity extends AppCompatActivity implements Validator.Vali
 
     @Override
     public void onValidationSucceeded() {
-        Toast.makeText(this, "We got it right!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(getApplicationContext(), FavoritePlatformActivity.class));
     }
 
