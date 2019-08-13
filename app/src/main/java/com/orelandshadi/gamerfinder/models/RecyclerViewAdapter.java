@@ -9,10 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.orelandshadi.gamerfinder.R;
-import com.orelandshadi.gamerfinder.ui.login.FavoriteGamesActivity;
 
 import java.util.ArrayList;
 import java.util.List;

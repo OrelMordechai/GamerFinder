@@ -64,13 +64,22 @@ public class UserData {
 
     }
 
-
     public UserData(String email, String password) {
         mEmail = email;
         mPassword = password;
     }
 
-//
+    public UserData(String email, String password, String username, UserGender gender, Integer age, String country, String about) {
+        mEmail = email;
+        mPassword = password;
+        mUsername = username;
+        mGender = gender;
+        mAge = age;
+        mCountry = country;
+        mAbout = about;
+    }
+
+    //
 //    public UserData(String mUsername, UserGender mGender, Integer mAge, String mCountry, String mAbout, UserDevice mDevice) {
 //        this.mUsername = mUsername;
 //        this.mGender = mGender;

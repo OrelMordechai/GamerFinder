@@ -1,4 +1,4 @@
-package com.orelandshadi.gamerfinder;
+package com.orelandshadi.gamerfinder.utils;
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;

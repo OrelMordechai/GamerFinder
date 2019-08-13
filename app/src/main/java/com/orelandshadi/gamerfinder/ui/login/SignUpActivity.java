@@ -21,10 +21,10 @@ import com.orelandshadi.gamerfinder.utils.StringUtils;
 public class SignUpActivity extends AppCompatActivity {
 
     // All this variables are NULL
+    private Button signUpButton;
     private EditText emailEditText;
     private EditText passwordEditText;
     private EditText confirmPasswordEditText;
-    private Button signUpButton;
     private CheckBox mCheckBox;
 
     @Override
@@ -55,10 +55,10 @@ public class SignUpActivity extends AppCompatActivity {
     //Initialize the views
     private void initViews() {
 
+        signUpButton = (Button) findViewById(R.id.btn_SignUp);
         emailEditText = (EditText) findViewById(R.id.SignUpEmail);
         passwordEditText = (EditText) findViewById(R.id.SignUpPassword);
         confirmPasswordEditText = (EditText) findViewById(R.id.ConfirmPassword);
-        signUpButton = (Button) findViewById(R.id.btn_SignUp);
         mCheckBox = (CheckBox) findViewById(R.id.Checkbox_Terms);
 
         signUpButton.setOnClickListener(new View.OnClickListener() {

@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import com.orelandshadi.gamerfinder.models.SessionData;
 import com.orelandshadi.gamerfinder.models.UserData;
 import com.orelandshadi.gamerfinder.ui.userprofile.MainGamesActivity;
 import com.orelandshadi.gamerfinder.ui.login.LoginActivity;
+
 
 public class SplashActivity extends AppCompatActivity {
 

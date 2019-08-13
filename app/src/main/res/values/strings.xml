@@ -39,6 +39,9 @@
     <string name="btn_send">Send</string>
     <string name="et_password_confirm">Confirm Password</string>
     <string name="username_already_exists">Username already exists</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="settings_fragment">Settings Fragment</string>
+    <string name="f_settings">Settings</string>
+    <string name="f_friends">Friends</string>
+    <string name="f_favorite">Favorite</string>
+    <string name="f_home">Home</string>
 </resources>
