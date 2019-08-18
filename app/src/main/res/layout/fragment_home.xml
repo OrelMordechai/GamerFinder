@@ -37,18 +37,18 @@
 
 
         <!--This for usernameText-->
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_below="@+id/imgUser"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/fightingspirit"
-            android:scaleType="fitCenter"
-            android:text="Username"
-            android:textColor="#DBE2EF"
-            android:textSize="23sp"/>
+        <!--<TextView-->
+            <!--android:id="@+id/username"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="3dp"-->
+            <!--android:layout_below="@+id/imgUser"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:fontFamily="@font/fightingspirit"-->
+            <!--android:scaleType="fitCenter"-->
+            <!--android:text="Username"-->
+            <!--android:textColor="#DBE2EF"-->
+            <!--android:textSize="23sp"/>-->
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
