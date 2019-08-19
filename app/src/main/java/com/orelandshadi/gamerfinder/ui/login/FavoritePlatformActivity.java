@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -23,15 +24,13 @@ public class FavoritePlatformActivity extends AppCompatActivity {
     private Button nextButton;
     private Button backButton;
 
-    private ArrayList<UserData.UserDevice> mDevices = new ArrayList<>();
-
+    private ArrayList<Integer> mFavoritePlatforms = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_platform);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
 
         xbox = (ImageButton) findViewById(R.id.xbox);
         ps4 = (ImageButton) findViewById(R.id.ps4);
@@ -43,13 +42,14 @@ public class FavoritePlatformActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 xbox.setSelected(!xbox.isSelected());
-                if(xbox.isSelected()) {
-                    mDevices.add(UserData.UserDevice.Xbox);
+                UserData.UserPlatforms platformType = UserData.UserPlatforms.Xbox;
+                int platformTypeId = platformType.getValue();
+                if (xbox.isSelected()) {
+                    mFavoritePlatforms.add(platformTypeId);
                     //Toast.makeText(FavoritePlatformActivity.this,"You select Xbox One",Toast.LENGTH_SHORT).show();
                 } else {
-                    mDevices.remove(UserData.UserDevice.Xbox);
+                    mFavoritePlatforms.remove(platformTypeId);
                 }
-
             }
         });
 
@@ -57,11 +57,13 @@ public class FavoritePlatformActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ps4.setSelected(!ps4.isSelected());
-                if(ps4.isSelected()) {
-                    mDevices.add(UserData.UserDevice.PS4);
+                UserData.UserPlatforms platformType = UserData.UserPlatforms.PS4;
+                int platformTypeId = platformType.getValue(); // productTypeId = 3
+                if (ps4.isSelected()) {
+                    mFavoritePlatforms.add(platformTypeId);
                     //Toast.makeText(FavoritePlatformActivity.this,"You select PS4",Toast.LENGTH_SHORT).show();
                 } else {
-                    mDevices.remove(UserData.UserDevice.PS4);
+                    mFavoritePlatforms.remove(platformTypeId);
                 }
             }
         });
@@ -70,16 +72,33 @@ public class FavoritePlatformActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 pc.setSelected(!pc.isSelected());
-                if(pc.isSelected()) {
-                    mDevices.add(UserData.UserDevice.PC);
+                UserData.UserPlatforms platformType = UserData.UserPlatforms.PC;
+                int platformTypeId = platformType.getValue(); // productTypeId = 3
+                if (pc.isSelected()) {
+                    mFavoritePlatforms.add(platformTypeId);
                     //Toast.makeText(FavoritePlatformActivity.this,"You select PC",Toast.LENGTH_SHORT).show();
                 } else {
-                    mDevices.remove(UserData.UserDevice.PC);
+                    mFavoritePlatforms.remove(platformTypeId);
                 }
-
             }
         });
 
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mFavoritePlatforms.size() > 0) {
+                    for (int i = 0; i < mFavoritePlatforms.size(); i++) {
+                        Log.d("@@@ platform ", mFavoritePlatforms.toString());
+                    }
+
+                    SessionData.sharedInstance().getUserData().setFavoritePlatforms(mFavoritePlatforms);
+                    Intent intent = new Intent(FavoritePlatformActivity.this, FavoriteGamesActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(FavoritePlatformActivity.this, "Please select your favorite platforms.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,20 +107,5 @@ public class FavoritePlatformActivity extends AppCompatActivity {
             }
         });
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mDevices.size() > 0) {
-                    SessionData.sharedInstance().getUserData().setDevice(mDevices);
-                    Intent intent = new Intent(FavoritePlatformActivity.this, FavoriteGamesActivity.class);
-                    startActivity(intent);
-                }else {
-                    Toast.makeText(FavoritePlatformActivity.this, "Please select your devices.",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
     }
-
-
 }

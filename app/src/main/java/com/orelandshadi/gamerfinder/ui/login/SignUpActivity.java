@@ -158,16 +158,15 @@ public class SignUpActivity extends AppCompatActivity implements HttpResponseCal
         Log.d("@@@ SignUpActivity", "onSuccessResponse: " + result);
         final String emailInput = emailEditText.getText().toString().trim();
         final String passwordInput = passwordEditText.getText().toString().trim();
-//        Toast.makeText(SignUpActivity.this, "Ok", Toast.LENGTH_SHORT).show();
-//        UserData userData = new UserData(emailInput, passwordInput);
-////                SessionData.sharedInstance().setUserData(userData);
-////                startActivity(new Intent(SignUpActivity.this, DetailsActivity.class));
+        Toast.makeText(SignUpActivity.this, "Ok", Toast.LENGTH_SHORT).show();
+        UserData userData = new UserData(emailInput, passwordInput);
+        SessionData.sharedInstance().setUserData(userData);
+        startActivity(new Intent(SignUpActivity.this, DetailsActivity.class));
     }
 
     @Override
     public void onErrorResponse(String result) {
         Log.d("@@@ SignUpActivity", "onErrorResponse: " + result);
-//        emailEditText.setError(result);
     }
 
     public void confirmInput(View v) {
@@ -190,7 +189,7 @@ public class SignUpActivity extends AppCompatActivity implements HttpResponseCal
 
             HttpRequest httpRequest = new HttpRequest(mContext);
             httpRequest.httpPostJsonRequest("isEmailExists", jsonBodyObj, this);
-            Log.d("@@@ line 192", "after request call");
+            Log.d("@@@ SignUpActivity", "confirmInput() after request call");
         }
     }
 
@@ -199,6 +198,5 @@ public class SignUpActivity extends AppCompatActivity implements HttpResponseCal
     public void loginButton(View v) {
         finish();
     }
-
 
 }

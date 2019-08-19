@@ -28,11 +28,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context mContext;
     //The Data class is a custom java class that acts as a structure for holding the information for every item of the RecyclerView.
     private List<Game> mListOfGame;
-    private ArrayList<Game> mFavoriteGames;
+    private ArrayList<Integer> mFavoriteGames;
 
 
     // Constructor
-    public RecyclerViewAdapter(Context mContext, List<Game> mListOfGame, ArrayList<Game> mFavoriteGame) {
+    public RecyclerViewAdapter(Context mContext, List<Game> mListOfGame, ArrayList<Integer> mFavoriteGame) {
         this.mContext = mContext;
         this.mListOfGame = mListOfGame;
         this.mFavoriteGames = mFavoriteGame;
@@ -63,15 +63,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View v) {
                 String temp = mListOfGame.get(position).getTitle();
                 infoGame.setSelected(!infoGame.isSelected());
-                if(infoGame.isSelected()) {
+                if (infoGame.isSelected()) {
                     viewHolder.cardView.setBackgroundColor(Color.parseColor("#039be5"));
                     viewHolder.tv_game_title.setTextColor(Color.parseColor("#ffffff"));
-                    mFavoriteGames.add(infoGame);
+                    mFavoriteGames.add(infoGame.getID());
                     //Toast.makeText(mContext,"You select " + mListOfGame.get(position).getTitle(),Toast.LENGTH_SHORT).show();
                 } else {
                     viewHolder.cardView.setBackgroundColor(Color.parseColor("#ffffff"));
                     viewHolder.tv_game_title.setTextColor(Color.parseColor("#000000"));
-                    mFavoriteGames.remove(infoGame);
+                    mFavoriteGames.remove(infoGame.getID());
                     //Toast.makeText(mContext,"unselect "+ mListOfGame.get(position).getTitle(),Toast.LENGTH_SHORT).show();
                 }
             }
@@ -97,28 +97,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             cardView = (CardView) itemView.findViewById(R.id.cardview_id);
 
         }
-    }
-
-
-    private List<Game> getData() {
-        List<Game> mListOfGame = new ArrayList<>();
-        mListOfGame.add(new Game("Apex Legends", R.drawable.apexlegends));
-        mListOfGame.add(new Game("Fortnite", R.drawable.fortnite));
-        mListOfGame.add(new Game("Call Of Duty Black ops 4", R.drawable.callofdutyblackops4));
-        mListOfGame.add(new Game("Rainbow six Siege", R.drawable.rainbowsixsiege));
-        mListOfGame.add(new Game("The Division 2", R.drawable.thedivision2));
-        mListOfGame.add(new Game("Playerunknown's Battlegrounds", R.drawable.playerunknownbattlegrounds));
-        mListOfGame.add(new Game("Black Desert Online", R.drawable.blackdesertonline));
-        mListOfGame.add(new Game("League of Legends", R.drawable.leagueoflegends));
-        mListOfGame.add(new Game("World of Warcraft", R.drawable.warcraft));
-        mListOfGame.add(new Game("Destiny 2", R.drawable.destiny2));
-        mListOfGame.add(new Game("Battlefield V", R.drawable.battlefieldv));
-        mListOfGame.add(new Game("Dota 2", R.drawable.dota2));
-        mListOfGame.add(new Game("Grand Theft Auto V", R.drawable.gtav));
-        mListOfGame.add(new Game("FIFA 19", R.drawable.fifa19));
-        mListOfGame.add(new Game("Mortal Kombat 11", R.drawable.mk11));
-
-        return mListOfGame;
     }
 
 }

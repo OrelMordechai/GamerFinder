@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.orelandshadi.gamerfinder.R;
 import com.orelandshadi.gamerfinder.models.LogFailDialog;
 import com.orelandshadi.gamerfinder.models.PasswordDialog;
+import com.orelandshadi.gamerfinder.ui.userprofile.MainGamesActivity;
 import com.orelandshadi.gamerfinder.utils.HttpRequest;
 import com.orelandshadi.gamerfinder.utils.HttpResponseCallback;
 import com.orelandshadi.gamerfinder.utils.StringUtils;
@@ -103,14 +104,14 @@ public class LoginActivity extends AppCompatActivity implements HttpResponseCall
     @Override
     public void onSuccessResponse(String result) {
         Log.d("@@@ LoginActivity", "onSuccessResponse: " + result);
-//        Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
-////                startActivity(new Intent(LoginActivity.this, MainGamesActivity.class));
+        Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(LoginActivity.this, MainGamesActivity.class));
     }
 
     @Override
     public void onErrorResponse(String result) {
         Log.d("@@@ LoginActivity", "onErrorResponse: " + result);
-//        LogDialog();
+        LogDialog();
     }
 
     public void confirmInput(View v) {

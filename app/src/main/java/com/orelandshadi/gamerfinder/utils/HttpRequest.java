@@ -39,30 +39,36 @@ public class HttpRequest {
         switch (requestType) {
             case "login":
                 URL = BASE_URL + "userHandle/Login";
-                Log.d("@url:", URL);
+                break;
+            case "signUp":
+                URL = BASE_URL + "userHandle/SignUp";
                 break;
             case "isEmailExists":
                 URL = BASE_URL + "userHandle/isEmailExists";
-                Log.d("@url:", URL);
                 break;
             case "isUserNameExists":
                 URL = BASE_URL + "userHandle/isUserNameExists";
-                Log.d("@url:", URL);
                 break;
             default:
                 callback.onErrorResponse("Something went wrong!");
                 break;
         }
 
+        Log.d("@url:", "URL: " + URL);
+
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, params,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("@onResponse", "......");
+                        Log.d("@onResponse", "onResponse");
                         try {
                             switch (requestType) {
                                 case "login":
                                     Log.d("@onResponse login", response.getString("user"));
+                                    callback.onSuccessResponse("");
+                                    break;
+                                case "signUp":
+                                    Log.d("@onResponse signUp", response.getString("result"));
                                     callback.onSuccessResponse("");
                                     break;
                                 case "isEmailExists":
@@ -102,6 +108,13 @@ public class HttpRequest {
                                         Log.d("@@@ Response ", "status code: " + error.networkResponse.statusCode);
                                         result = bodyJSON.getString("Message");
                                         callback.onErrorResponse(result);
+                                        break;
+
+                                    case "signUp":
+                                        Log.d("@@@ Response ", "status code: " + error.networkResponse.statusCode);
+                                        result = bodyJSON.getString("Message");
+                                        callback.onErrorResponse(result);
+                                        Log.d("@@@ Error ", "bodyJSON -> Message: " + bodyJSON.getString("Message"));
                                         break;
 
                                     case "isEmailExists":

@@ -1,16 +1,23 @@
 package com.orelandshadi.gamerfinder.ui.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 
+import com.android.volley.toolbox.HttpResponse;
+import com.mikelau.countrypickerx.Country;
+import com.mikelau.countrypickerx.CountryPickerCallbacks;
+import com.mikelau.countrypickerx.CountryPickerDialog;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Length;
@@ -20,28 +27,27 @@ import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.orelandshadi.gamerfinder.R;
 import com.orelandshadi.gamerfinder.models.SessionData;
 import com.orelandshadi.gamerfinder.models.UserData;
+import com.orelandshadi.gamerfinder.utils.HttpRequest;
+import com.orelandshadi.gamerfinder.utils.HttpResponseCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
-public class DetailsActivity extends AppCompatActivity implements Validator.ValidationListener {
-
+public class DetailsActivity extends AppCompatActivity implements HttpResponseCallback {
 
     // All this variables are NULL
-    @NotEmpty
-    @Length(min = 3, max = 15)
     private EditText userNameEditText;
-    @Min(3)
-    @Max(120)
     private EditText ageEditText;
-
-    private EditText countryEditText;
+    private Button countryButton;
     private EditText aboutEditText;
     private Button nextButton;
     private Button backButton;
-    private RadioGroup radioGenderGroup;
-
-    private Validator validator;
-
+    private RadioGroup radioGroupGender;
+    private RadioGroup radioGroupHasMicrophone;
+    private CountryPickerDialog countryPicker;
+    private DetailsActivity self = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,43 +56,48 @@ public class DetailsActivity extends AppCompatActivity implements Validator.Vali
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         // We calling this function for fill the variables
         initViews();
-        validator = new Validator(this);
-        validator.setValidationListener(this);
-    }
 
-    // Function for fill the variables
-    private void initViews() {
-        userNameEditText = (EditText) findViewById(R.id.UserName);
-        ageEditText = (EditText) findViewById(R.id.Age);
-        countryEditText = (EditText) findViewById(R.id.Country);
-        aboutEditText = (EditText) findViewById(R.id.About);
-        radioGenderGroup = (RadioGroup) findViewById(R.id.genderId);
-        backButton = (Button) findViewById(R.id.backId);
+        countryPicker = new CountryPickerDialog(DetailsActivity.this, new CountryPickerCallbacks() {
+            @Override
+            public void onCountrySelected(Country country, int flagResId) {
+                Log.d("@@@ Country", "country name: " + country.getCountryName(DetailsActivity.this) + ", flagResId: " + flagResId);
+                countryButton.setText(country.getCountryName(DetailsActivity.this));
+                countryPicker.dismiss();
+            }
+        }, false, 0);
 
-        nextButton = (Button) findViewById(R.id.nextId);
-
+        countryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                countryPicker.show();
+            }
+        });
 
         // When you click on NEXT button it will saved all the data that you filling
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validator.validate();
-                String username = userNameEditText.getText().toString();
-                if (username.equalsIgnoreCase("pmk")) {
-                    userNameEditText.setError(getText(R.string.username_already_exists));
-                }
-                // We call the function [checkUserDetails] to check all the details that was inserted.
-                // If return TRUE then will saved all the details that been inserted.
-                if (checkUserDetails()) {
-                    SessionData.sharedInstance().getUserData().setUsername(userNameEditText.getText().toString());
-                    SessionData.sharedInstance().getUserData().setCountry(countryEditText.getText().toString());
-                    SessionData.sharedInstance().getUserData().setAbout(aboutEditText.getText().toString());
-                    SessionData.sharedInstance().getUserData().setAge(Integer.parseInt(ageEditText.getText().toString()));
-                    boolean isMale = radioGenderGroup.getCheckedRadioButtonId() == R.id.rd_male;
-                    SessionData.sharedInstance().getUserData().setGender(isMale ? UserData.UserGender.Male : UserData.UserGender.Female);
-                    startActivity(new Intent(getApplicationContext(), FavoritePlatformActivity.class));
+                // We call the function [userDetailsAreValid] to check all the details that was inserted.
+                if (userDetailsAreValid()) {
+                    Context mContext = getApplicationContext();
+
+                    final String userName = userNameEditText.getText().toString().trim();
+
+                    Log.d("@@@ userName", userName);
+
+                    JSONObject jsonBodyObj = new JSONObject();
+                    try {
+                        jsonBodyObj.put("UserName", userName);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    HttpRequest httpRequest = new HttpRequest(mContext);
+                    httpRequest.httpPostJsonRequest("isUserNameExists", jsonBodyObj, self);
+                    Log.d("@@@ line 95", "after request call");
+
                 } else { // When you miss something , will show a message that you need to complete your details.
-                    Toast.makeText(getApplicationContext(), "Please enter your details", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Please enter your details" , Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -98,18 +109,39 @@ public class DetailsActivity extends AppCompatActivity implements Validator.Vali
                 onBackPressed();
             }
         });
+    }
 
+    // Function for fill the variables
+    private void initViews() {
+        userNameEditText = (EditText) findViewById(R.id.UserName);
+        ageEditText = (EditText) findViewById(R.id.Age);
+        countryButton = (Button) findViewById(R.id.Country);
+        aboutEditText = (EditText) findViewById(R.id.About);
+        radioGroupGender = (RadioGroup) findViewById(R.id.genderId);
+        radioGroupHasMicrophone = (RadioGroup) findViewById(R.id.hasMicID);
+        backButton = (Button) findViewById(R.id.backId);
+        nextButton = (Button) findViewById(R.id.nextId);
     }
 
     // For checking all the details that was inserted.
-    private boolean checkUserDetails() {
+    private boolean userDetailsAreValid() {
         boolean status = true;
         if (userNameEditText.getText().toString() == null || userNameEditText.getText().toString().isEmpty()) {
+            userNameEditText.setError("User name can't be empty");
             status = false;
         }
 
-        if (countryEditText.getText().toString() == null || countryEditText.getText().toString().isEmpty()) {
+        if (userNameEditText.getText().toString().length() < 3 || userNameEditText.getText().toString().length() > 19) {
+            userNameEditText.setError("User name length must be in range 3-19");
             status = false;
+        }
+
+        if (countryButton.getText().toString() == null || countryButton.getText().toString().isEmpty()) {
+            Log.d("@@@ Country error",countryButton.getText().toString());
+            countryButton.setError("Country can't be empty");
+            status = false;
+        } else{
+            countryButton.setError(null);
         }
 
         if (ageEditText.getText().toString() != null || !ageEditText.getText().toString().isEmpty()) {
@@ -128,25 +160,33 @@ public class DetailsActivity extends AppCompatActivity implements Validator.Vali
         } else {
             status = false;
         }
+
         return status;
     }
 
     @Override
-    public void onValidationSucceeded() {
+    public void onSuccessResponse(String result) {
+        Log.d("@@@ DetailsActivity", "onSuccessResponse: " + result);
+
+        UserData userData = SessionData.sharedInstance().getUserData();
+        userData.setUsername(userNameEditText.getText().toString());
+        userData.setCountry(countryButton.getText().toString());
+        userData.setAbout(aboutEditText.getText().toString());
+        userData.setAge(Integer.parseInt(ageEditText.getText().toString()));
+
+        RadioButton genderRadioButton = findViewById(radioGroupGender.getCheckedRadioButtonId());
+        String gender = genderRadioButton.getText().toString();
+        userData.setGender(gender);
+
+        RadioButton hasMicrophoneRadioButton = findViewById(radioGroupHasMicrophone.getCheckedRadioButtonId());
+        boolean hasMicrophone = hasMicrophoneRadioButton.getText().toString().equals("Yes") ? true : false;
+        userData.setHasMicrophone(hasMicrophone);
+
         startActivity(new Intent(getApplicationContext(), FavoritePlatformActivity.class));
     }
 
     @Override
-    public void onValidationFailed(List<ValidationError> errors) {
-        for (ValidationError error : errors) {
-            View view = error.getView();
-            String message = error.getCollatedErrorMessage(this);
-            // Display error messages
-            if (view instanceof EditText) {
-                ((EditText) view).setError(message);
-            } else {
-                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-            }
-        }
+    public void onErrorResponse(String result) {
+        Log.d("@@@ DetailsActivity", "onErrorResponse: " + result);
     }
 }

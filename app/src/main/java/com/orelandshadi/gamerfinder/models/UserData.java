@@ -1,63 +1,52 @@
 package com.orelandshadi.gamerfinder.models;
 
 
-import com.orelandshadi.gamerfinder.R;
-
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserData {
 
-    public enum UserGender {
-        Male, Female
-    }
-
-    public enum UserDevice{
-        Xbox, PS4, PC
-    }
-
-//    public enum FavoriteGame{
-//        Apex_Legends("Apex Legends", R.drawable.apexlegends),
-//        Fortnite("Fortnite", R.drawable.fortnite),
-//        Call_Of_Duty_Black_ops_4("Call Of Duty Black ops 4", R.drawable.callofdutyblackops4),
-//        Rainbow_six_Siege("Rainbow six Siege", R.drawable.rainbowsixsiege),
-//        The_Division_2("The Division 2", R.drawable.thedivision2),
-//        Playerunknowns_Battlegrounds("Playerunknown's Battlegrounds", R.drawable.playerunknownbattlegrounds),
-//        Black_Desert_Online("Black Desert Online", R.drawable.blackdesertonline),
-//        League_of_Legends("League of Legends", R.drawable.leagueoflegends),
-//        World_of_Warcraft("World of Warcraft", R.drawable.warcraft),
-//        Destiny_2("Destiny 2", R.drawable.destiny2),
-//        Battlefield_V("Battlefield V", R.drawable.battlefieldv),
-//        Dota_2("Dota 2", R.drawable.dota2),
-//        Grand_Theft_Auto_V("Grand Theft Auto V", R.drawable.gtav),
-//        FIFA_19("FIFA 19", R.drawable.fifa19),
-//        Mortal_Kombat_11("Mortal Kombat 11", R.drawable.mk11);
-//
-//        private String Title;
-//        private int idImg;
-//
-//        FavoriteGame(String title, int idImg) {
-//            Title = title;
-//            this.idImg = idImg;
-//        }
-//
-//        public String getTitle() {
-//            return Title;
-//        }
-//
-//        public int getIdImg() {
-//            return idImg;
-//        }
+//    public enum UserGender {
+//        Male, Female
 //    }
+
+    public enum UserPlatforms {
+        Xbox(1), PS4(2), PC(3);
+
+        private int value;
+        private static Map map = new HashMap<>();
+
+        private UserPlatforms(int value) {
+            this.value = value;
+        }
+
+        static {
+            for (UserPlatforms pageType : UserPlatforms.values()) {
+                map.put(pageType.value, pageType);
+            }
+        }
+
+        public static UserPlatforms valueOf(int pageType) {
+            return (UserPlatforms) map.get(pageType);
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+    }
 
     private String mEmail;
     private String mPassword;
     private String mUsername;
-    private UserGender mGender;
+    private String mGender;
+    private boolean mHasMicrophone;
     private Integer mAge;
     private String mCountry;
     private String mAbout;
-    private ArrayList<UserDevice> mDevices;
-    private ArrayList<Game> mfavoriteGame;
+    private ArrayList<Integer> mFavoritePlatforms;
+    private ArrayList<Integer> mFavoriteGames;
     private boolean didUserCompleteRegistration;
 
     public UserData() {
@@ -69,7 +58,7 @@ public class UserData {
         mPassword = password;
     }
 
-    public UserData(String email, String password, String username, UserGender gender, Integer age, String country, String about) {
+    public UserData(String email, String password, String username, String gender, Integer age, boolean hasMicrophone, String country, String about) {
         mEmail = email;
         mPassword = password;
         mUsername = username;
@@ -77,19 +66,8 @@ public class UserData {
         mAge = age;
         mCountry = country;
         mAbout = about;
+        mHasMicrophone = hasMicrophone;
     }
-
-    //
-//    public UserData(String mUsername, UserGender mGender, Integer mAge, String mCountry, String mAbout, UserDevice mDevice) {
-//        this.mUsername = mUsername;
-//        this.mGender = mGender;
-//        this.mAge = mAge;
-//        this.mCountry = mCountry;
-//        this.mAbout = mAbout;
-//        this.mDevice = mDevice;
-//    }
-
-
 
     public String getAbout() {
         return mAbout;
@@ -107,7 +85,6 @@ public class UserData {
         mCountry = country;
     }
 
-
     public Integer getAge() {
         return mAge;
     }
@@ -116,27 +93,23 @@ public class UserData {
         mAge = age;
     }
 
-    public  ArrayList<UserDevice> getDevices() {
-        return mDevices;
+    public ArrayList<Integer> getFavoritePlatforms() {
+        return mFavoritePlatforms;
     }
 
-    public  ArrayList<Game> getMfavoriteGame() {
-        return mfavoriteGame;
+    public ArrayList<Integer> getFavoriteGames() {
+        return mFavoriteGames;
     }
 
-    public void setMfavoriteGame( ArrayList<Game> gameFav) {
-        mfavoriteGame = gameFav;
+    public void setFavoriteGames(ArrayList<Integer> gameFav) {
+        mFavoriteGames = gameFav;
     }
 
-    public void setDevice( ArrayList<UserDevice> devices) {
-        mDevices = devices;
-    }
-
-    public UserGender getGender() {
+    public String getGender() {
         return mGender;
     }
 
-    public void setGender(UserGender gender) {
+    public void setGender(String gender) {
         mGender = gender;
     }
 
@@ -162,6 +135,18 @@ public class UserData {
 
     public void setUsername(String username) {
         mUsername = username;
+    }
+
+    public boolean getHasMicrophone() {
+        return mHasMicrophone;
+    }
+
+    public void setHasMicrophone(boolean hasMicrophone) {
+        mHasMicrophone = hasMicrophone;
+    }
+
+    public void setFavoritePlatforms(ArrayList<Integer> favoritePlatforms) {
+        mFavoritePlatforms = favoritePlatforms;
     }
 
     public boolean isDidUserCompleteRegistration() {

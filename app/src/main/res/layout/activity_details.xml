@@ -77,7 +77,7 @@
             android:textColor="#DBE2EF"
             android:textSize="20sp" />
 
-        <EditText
+        <Button
             android:id="@+id/Country"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -89,6 +89,8 @@
             android:fontFamily="sans-serif-light"
             android:hint="@string/et_country"
             android:inputType="textPersonName"
+            android:gravity="left"
+            android:paddingTop="8dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:textColor="#DBE2EF"
@@ -145,7 +147,7 @@
         </RadioGroup>
 
         <RadioGroup
-            android:id="@+id/MicID"
+            android:id="@+id/hasMicID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/genderId"
